@@ -34,7 +34,7 @@ testX = testX.astype("float") / 255.0
 # convert the labels from integers to vectors
 lb = LabelBinarizer()
 trainY = lb.fit_transform(trainY)
-testY = lb.transform(testY)
+testY = lb.fit_transform(testY)
 
 # initialize the label names for the CIFAR-10 dataset
 labelNames = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]

@@ -43,5 +43,5 @@ class TrainingMonitor(BaseLogger):
             plt.xlabel("Epoch #")
             plt.ylabel("Loss/Accuracy")
             plt.legend()
-            plt.savefig(self.figPath)
+            plt.savefig(self.figPath + '-epoch' + str(epoch) + '.png')
             plt.close()
