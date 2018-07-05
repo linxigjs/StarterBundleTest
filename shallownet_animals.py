@@ -27,13 +27,16 @@ data = data.astype("float") / 255.0
 
 trainX, testX, trainY, testY = train_test_split(data, labels, test_size=0.25, random_state=42)
 trainY = LabelBinarizer().fit_transform(trainY)
-testY = LabelBinarizer().fit_transform(testY)
+testY = LabelBinarizer().transform(testY)
+
 print("[INFO] compiling model...")
 opt = SGD(lr=0.005)
 model = ShallowNet.build(width=32, height=32, depth=3, classes=3)
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data=(testX, testY), batch_size=32, epochs=100, verbose=1)
+
 print("[INFO] evaluating network...")
 predictions = model.predict(testX, batch_size=32)
 print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1), target_names=['cat', 'dog', 'panda']))

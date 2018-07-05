@@ -13,15 +13,17 @@ testX = testX.astype('float') / 255.0
 
 lb = LabelBinarizer()
 trainY = lb.fit_transform(trainY)
-testY = lb.fit_transform(testY)
+testY = lb.transform(testY)
 labelNames = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 print("[INFO] compiling model...")
 opt = SGD(lr=0.005)
 model = ShallowNet.build(width=32, height=32, depth=3, classes=10)
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+
 print("[INFO] compiling model...")
 H = model.fit(trainX, trainY, validation_data=(testX, testY), batch_size=32, epochs=40, verbose=1)
+
 print("[INFO] evaluating network...")
 predictions = model.predict(testX, batch_size=32)
 print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1), target_names=labelNames))

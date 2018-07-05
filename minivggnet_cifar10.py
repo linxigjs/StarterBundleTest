@@ -20,7 +20,7 @@ trainX = trainX.astype('float') / 255.0
 testX = testX.astype('float') / 255.0
 lb = LabelBinarizer()
 trainY = lb.fit_transform(trainY)
-testY = lb.fit_transform(testY)
+testY = lb.transform(testY)
 
 labelNames = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 

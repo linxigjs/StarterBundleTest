@@ -23,7 +23,7 @@ else:
 (trainX, testX, trainY, testY) = train_test_split(data / 255.0, dataset.target.astype("int"), test_size=0.25, random_state=42)
 le = LabelBinarizer()
 trainY = le.fit_transform(trainY)
-testY = le.fit_transform(testY)
+testY = le.transform(testY)
 
 print('[INFO] compiling model...')
 opt = SGD(lr=0.01)
